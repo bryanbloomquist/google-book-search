@@ -1,0 +1,16 @@
+import axios from "axios";
+
+export default {
+  getBooks: function() { // gets all books
+    return axios.get( "/api/books" );
+  },
+  searchBooks: function( query ) { // search for books
+    return axios.get( "https://www.googleapis.com/books/v1/volumes?q=?" + query );
+  },
+  deleteBook: function( id ) { // deletes the book with the given id
+    return axios.delete( "/api/books/" + id );
+  },
+  saveBook: function( bookData ) { // saves a book to the database
+    return axios.post( "/api/books/", bookData );
+  }
+};
