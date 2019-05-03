@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 
 const ResultCard = ( props ) => {
   return (
-    <Card key = { props._id } id = { props._id }>
+    <Card key = { props.id } id = { props.id }>
       <Card.Body>
         <Row>
           <Col>

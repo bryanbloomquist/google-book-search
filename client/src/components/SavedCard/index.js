@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 
 const SavedCard = ( props ) => {
   return (
-    <Card key = { props._id } id = { props._id }>
+    <Card key = { props.id } id = { props.id }>
       <Card.Body>
         <Row>
           <Col>
@@ -16,7 +16,7 @@ const SavedCard = ( props ) => {
             <Button onClick = {() => { props.view( props.link )}}>View</Button>
           </Col>
           <Col className = "float-right">
-            <Button onClick = {() => { props.delete( props._id )}}>Delete</Button>
+            <Button onClick = {() => { props.delete( props.id )}}>Delete</Button>
           </Col>
         </Row>
         <Row>

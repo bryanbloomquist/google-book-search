@@ -3,10 +3,8 @@ import API from "../utils/API";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import ResultCard from "../components/ResultCard";
-import Row from "react-bootstrap/Row";
 
 class Search extends Component {
   state = {
@@ -22,37 +20,65 @@ class Search extends Component {
   };
 
   handleFormSubmit = ( event ) => {
+    event.preventDefault();
+    API.searchBooks( this.state.bookSearch )
     .then(( res ) => {
-      event.preventDefault() {
-        let bookList = [];
-        API.searchBooks( this.state.search )
-        .then(( res ) => {
-          res.data.items.forEach(( book ) => {
-            bookList.push( book );
-          })
-        });
-        this.setState({ results: bookList });
-        console.log( this.state );
-      }
+      this.setState({ results: res.data })
     })
-    .catch(( err ) => {
-      console.log( this.state, err );
-    });
+    .catch(( err ) => console.log( err ));
   };
 
   handleView( url ) { window.location.href = url; };
 
-  handleSave = ( object ) => {
-    console.log( object );
-    API.saveBook( object )
+  handleSave = ( ob ) => {
+    console.log( ob );
+    API.saveBook( ob )
     .then(( res ) => console.log( res ))
     .catch(( err ) => console.log( err ));
   };
 
   render() {
     return (
-
+      <div>
+        <Container>
+          <Form.Group controlId = "searchForBook">
+            <Form.Row>
+              <Form.Label>Book Search</Form.Label>
+            </Form.Row>
+            <Form.Row>
+              <Col>
+                <Form.Control 
+                  type = "text"
+                  value = { this.state.bookSearch }
+                  onChange = { this.handleInputChange }
+                />
+              </Col>
+              <Col>
+                <Button className = "float-right" onClick = { this.handleFormSubmit }>
+                  Search
+                </Button>
+              </Col>
+            </Form.Row>
+          </Form.Group>
+        </Container>
+        <Container>
+          { this.state.results.map(( book ) => (
+            <ResultCard
+              author = { book.volumeInfo.authors }
+              description = { book.volumeInfo.description }
+              id = { book.id }
+              image = { book.volumeInfo.imageLinks.thumbnail }
+              key = { book.id }
+              link = { book.volumeInfo.previewLink }
+              save = {() => { this.handleSave( book )}}
+              title = { book.volumeInfo.title }
+              view = { this.handleView }
+            />
+          ))}
+        </Container>
+      </div>
     )
   }
-
 }
+
+export default Search;
