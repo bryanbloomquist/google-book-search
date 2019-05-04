@@ -4,6 +4,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
+const styles = {
+  images: {
+    width: "150px"
+  }
+}
+
 const ResultCard = ( props ) => {
   return (
     <Card key = { props.id } id = { props.id }>
@@ -16,7 +22,10 @@ const ResultCard = ( props ) => {
             <Button onClick = {() => { props.save( )}}>Save</Button>
           </Col>
           <Col className = "float-right">
-            <Button onClick = {() => { props.view( props.link )}}>View</Button>
+            <Button className="btn-secondary">
+              <a href = { props.link } target = "_blank">View</a>
+            </Button>
+            {/* <Button onClick = {() => { props.view( props.link )}}>View</Button> */}
           </Col>
         </Row>
         <Row>
@@ -26,7 +35,11 @@ const ResultCard = ( props ) => {
         </Row>
         <Row>
           <Col>
-            <Card.Img src = { props.image } alt = { props.title } />
+            <Card.Img 
+              style = { styles.images } 
+              src = { props.image } 
+              alt = { props.title } 
+            />
           </Col>
           <Col>
             <p>{ props.description }</p>

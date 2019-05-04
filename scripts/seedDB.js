@@ -13,11 +13,11 @@ const bookSeed = [
     link: "http://books.google.com/books?id=sazytgAACAAJ&dq=title:The+Hunger+Games&hl=&source=gbs_api",
     title: "The Hunger Games"
   }
-]
+];
 
 db.Book
-  .remove({}) // empties book collection
-  .then(() => db.Bookcollection.insertMany( bookSeed )) // adds bookSeed to book collection
+  .remove({})
+  .then(() => db.Book.collection.insertMany( bookSeed )) // adds bookSeed to book collection
   .then(( data ) => {
     console.log( data.result.n + " records inserted!" );
     process.exit( 0 ); // instructs Node.js to terminate the process with a success ('0') code

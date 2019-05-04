@@ -21,7 +21,7 @@ app.get( "*", ( req, res ) => {
 
 // connect to the Mongo DB
 mongoose.connect(
-  processs.env.MONGODB_URI || "mongodb://localhost/googleBooks"
+  process.env.MONGODB_URI || "mongodb://localhost/googleBooks"
 );
 
 // start the API server

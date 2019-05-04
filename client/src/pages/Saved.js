@@ -9,14 +9,15 @@ class Saved extends Component {
   }
 
   getBooks() {
-    API.loadBooks()
+    API.getBooks()
     .then(( res ) => {
+      console.log( res.data );
       this.setState({ results: res.data })
     })
     .catch(( err ) => console.log( err ))
   }
 
-  compnonentDidMount() {
+  componentDidMount() {
     this.getBooks();
   }
 
@@ -34,23 +35,21 @@ class Saved extends Component {
 
   render() {
     return (
-      <div>
-        <Container>
-          { this.state.results.map(( book ) => (
-            <SavedCard
-              author = { book.authors }
-              delete = { this.deleteBook }
-              description = { book.description }
-              id = { book._id }
-              image = { book.image }
-              key = { book._id }
-              link = { book.link }
-              title = { book.title }
-              view = { this.handleView }
-            />
-          ))}
-        </Container>
-      </div>
+      <Container>
+        { this.state.results.map(( book ) => (
+          <SavedCard
+            author = { book.author }
+            delete = { this.deleteBook }
+            description = { book.description }
+            id = { book._id }
+            image = { book.image }
+            key = { book.key }
+            link = { book.link }
+            title = { book.title }
+            // view = { this.handleView }
+          />
+        ))}
+      </Container>
     );
   }
 }
