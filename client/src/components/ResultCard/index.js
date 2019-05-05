@@ -23,7 +23,7 @@ const ResultCard = ( props ) => {
           </Col>
           <Col className = "float-right">
             <Button className="btn-secondary">
-              <a href = { props.link } target = "_blank">View</a>
+              <a href = { props.link } target = "_blank" rel = "noopener noreferrer">View</a>
             </Button>
             {/* <Button onClick = {() => { props.view( props.link )}}>View</Button> */}
           </Col>
