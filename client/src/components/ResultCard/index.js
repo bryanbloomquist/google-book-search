@@ -6,43 +6,55 @@ import Button from "react-bootstrap/Button";
 
 const styles = {
   images: {
-    width: "150px"
+    maxWidth: "150px",
+    maxHeight: "200px"
+  },
+  bodyStyle: {
+    background: "#bbf",
+    border: "3px solid #c62"
+  },
+  descriptionStyle: {
+    maxHeight: "200px",
+    overflow: "auto"
   }
 }
 
 const ResultCard = ( props ) => {
   return (
     <Card key = { props.id } id = { props.id }>
-      <Card.Body>
+      <Card.Body style = { styles.bodyStyle }>
         <Row>
           <Col>
-            <Card.Title>{ props.title }</Card.Title>
+            <Row>
+              <Col>
+                <Card.Title className = "text-primary"><h4>{ props.title }</h4></Card.Title>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <p className = "text-danger"><h5>By { props.author[0] }</h5></p>
+              </Col>
+            </Row>
           </Col>
-          <Col className = "float-right">
+          <Col xs = "auto" className = "float-right p-1">
             <Button onClick = {() => { props.save( )}}>Save</Button>
           </Col>
-          <Col className = "float-right">
-            <Button className="btn-secondary">
-              <a href = { props.link } target = "_blank" rel = "noopener noreferrer">View</a>
-            </Button>
-            {/* <Button onClick = {() => { props.view( props.link )}}>View</Button> */}
+          <Col xs = "auto" className = "float-right p-1">
+            <a href = { props.link } target = "_blank" rel = "noopener noreferrer">
+              <Button>View</Button>
+            </a>
           </Col>
         </Row>
         <Row>
-          <Col>
-            <p>By { props.author }</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
+          <Col xs = "auto">
             <Card.Img 
               style = { styles.images } 
               src = { props.image } 
-              alt = { props.title } 
+              alt = { props.title }
             />
           </Col>
-          <Col>
-            <p>{ props.description }</p>
+          <Col style = { styles.descriptionStyle }>
+            <p className = "text-success bg-light p-2">{ props.description }</p>
           </Col>
         </Row>
       </Card.Body>

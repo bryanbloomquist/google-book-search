@@ -6,6 +6,18 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import ResultCard from "../components/ResultCard";
 
+const styles = {
+  bgSearch: {
+    background: "#a86",
+    padding: "20px 30px"
+  },
+  bgResults: {
+    background: "#33c",
+    minHeight: "50vh",
+    padding: "20px 30px",
+  }
+}
+
 class Search extends Component {
   state = {
     results: [],
@@ -40,10 +52,15 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <Container>
+        <Container style = { styles.bgSearch }>
           <Form.Group controlId = "searchForBook">
             <Form.Row>
-              <Form.Label>Book Search</Form.Label>
+              <Form.Label>
+                <h4>
+                  <span className = "text-primary">Book </span>  
+                  <span className = "text-danger">Search</span>  
+                </h4>
+              </Form.Label>
             </Form.Row>
             <Form.Row>
               <Col>
@@ -53,7 +70,7 @@ class Search extends Component {
                   onChange = { this.handleInputChange }
                 />
               </Col>
-              <Col>
+              <Col xs = "auto">
                 <Button className = "float-right" onClick = { this.handleFormSubmit }>
                   Search
                 </Button>
@@ -61,7 +78,10 @@ class Search extends Component {
             </Form.Row>
           </Form.Group>
         </Container>
-        <Container>
+        <Container style = { styles.bgResults }>
+          <h4>
+            <span className = "text-success">Results</span>  
+          </h4>
           { this.state.results.map(( book ) => {
             let currentBook = {
               "author": book.volumeInfo.authors ? book.volumeInfo.authors : "No Authors Available",

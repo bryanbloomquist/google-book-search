@@ -38,7 +38,7 @@ class Saved extends Component {
       <Container>
         { this.state.results.map(( book ) => (
           <SavedCard
-            author = { book.author }
+            author = { book.author[0] }
             delete = { this.deleteBook }
             description = { book.description }
             id = { book._id }
