@@ -4,6 +4,10 @@
   "description": "A google book search app using MERN stack",
   "private": true,
   "proxy": "http://localhost:3001/",
+  "engines": {
+    "npm": "^6.9.0",
+    "node": "^10.5.1"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.6.3",
