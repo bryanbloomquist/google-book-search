@@ -32,7 +32,7 @@ const ResultCard = ( props ) => {
             </Row>
             <Row>
               <Col>
-                <p className = "text-danger"><h5>By { props.author[0] }</h5></p>
+                <h5 className = "text-danger">By { props.author[0] }</h5>
               </Col>
             </Row>
           </Col>

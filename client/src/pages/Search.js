@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 import ResultCard from "../components/ResultCard";
 
 const styles = {
@@ -19,9 +20,24 @@ const styles = {
 }
 
 class Search extends Component {
+  constructor( props, context ) {
+    super( props, context );
+    this.handleShow = this.handleShow.bind( this );
+    this.handleClose = this.handleClose.bind( this );
+  }
+
   state = {
     results: [],
-    search: ""
+    search: "",
+    show: false
+  }
+
+  handleClose = () => {
+    this.setState({ show: false });
+  }
+
+  handleShow = () => {
+    this.setState({ show: true });
   }
 
   handleInputChange = ( event ) => {
@@ -45,8 +61,18 @@ class Search extends Component {
 
   handleSave = ( ob ) => {
     API.saveBook( ob )
-    .then(( res ) => console.log( res ))
-    .catch(( err ) => console.log( err ));
+    .then(( res ) => {
+      console.log( res )
+      this.setState({ modalTitle: "Hooray!" })
+      this.setState({ modalBody: "You have added a book to your saved book list!"})
+      this.handleShow();
+    })
+    .catch(( err ) => {
+      console.log( err )
+      this.setState({ modalTitle: "Oops!" })
+      this.setState({ modalBody: "It looks like you've already saved this book."})
+      this.handleShow();
+    });
   };
 
   render() {
@@ -107,6 +133,17 @@ class Search extends Component {
             )
           })}
         </Container>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header>
+            <Modal.Title>{ this.state.modalTitle }</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{ this.state.modalBody }</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>        
       </div>
     )
   };
