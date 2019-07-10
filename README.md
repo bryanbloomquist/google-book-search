@@ -4,7 +4,7 @@
 Deployed Site: [react-google.herokuapp.com](https://react-google.herokuapp.com)
 
 
-### Overview
+## Overview
 
 
 Google Books Search is a full stack application that searches Google for books.  This application uses React components, works with helper/util functions, and utilizes React lifecycle methods to query and display books based on user searches. Node, Express and MongoDB are used so that users can save books to review or purchase later.
